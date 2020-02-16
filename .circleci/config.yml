@@ -7,7 +7,7 @@ workflows:
     jobs:
       - helm-tools/helm-publish:
           chart-org: pennlabs
-          chart-repo: labscraft
+          chart-repo: helm-charts
           git-branch: master
           context: git-bot
           filters:
