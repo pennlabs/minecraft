@@ -37,7 +37,7 @@ spec:
         {{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
-        {{- if .Values.readinessProbe.enable }}
+        {{- if .Values.readinessProbe.enabled }}
         readinessProbe:
           exec:
             command: 
@@ -48,7 +48,7 @@ spec:
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
         {{- end }}
-        {{- if .Values.livenessProbe.enable }}
+        {{- if .Values.livenessProbe.enabled }}
         livenessProbe:
           exec:
             command:
