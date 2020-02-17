@@ -30,10 +30,10 @@ spec:
       - name: {{ template "minecraft.fullname" . }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         imagePullPolicy: Always
-        {{- if .secret }}
-          envFrom:
-            - secretRef:
-              name: {{ .secret }}
+        {{- if .Values.minecraftServer.secret }}
+        envFrom:
+          - secretRef:
+              name: {{ .Values.minecraftServer.secret }}
         {{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
