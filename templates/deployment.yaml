@@ -37,6 +37,7 @@ spec:
         {{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
+        {{- if .Values.readinessProbe.enabled }}
         readinessProbe:
           exec:
             command: 
@@ -46,6 +47,8 @@ spec:
           failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        {{- end }}
+        {{- if .Values.livenessProbe.enabled }}
         livenessProbe:
           exec:
             command:
@@ -55,6 +58,7 @@ spec:
           failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
           successThreshold: {{ .Values.livenessProbe.successThreshold }}
           timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        {{- end }}
         env:
         - name: EULA
           value: {{ .Values.minecraftServer.eula | quote }}
