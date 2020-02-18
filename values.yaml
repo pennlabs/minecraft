@@ -1,5 +1,5 @@
 # ref: https://hub.docker.com/r/itzg/minecraft-server/
-image: itzg/minecraft-server
+image: pennlabs/docker-minecraft-spigot
 imageTag: latest
 
 ## Configure resource requests and limits

@@ -33,10 +33,10 @@ spec:
       - name: {{ template "minecraft.fullname" . }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         imagePullPolicy: Always
-        {{- if .secret }}
-          envFrom:
-            - secretRef:
-              name: {{ .secret }}
+        {{- if .Values.minecraftServer.secret }}
+        envFrom:
+          - secretRef:
+              name: {{ .Values.minecraftServer.secret }}
         {{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
@@ -94,10 +94,14 @@ spec:
           value: {{ .Values.minecraftServer.version | quote }}
         - name: DIFFICULTY
           value: {{ .Values.minecraftServer.difficulty | quote }}
+        {{- if .Values.minecraftServer.whitelist }}
         - name: WHITELIST
           value: {{ default "" .Values.minecraftServer.whitelist | quote }}
+        {{- end }}
+        {{- if .Values.minecraftServer.ops }}
         - name: OPS
           value: {{ default "" .Values.minecraftServer.ops | quote }}
+        {{- end}}
         - name: ICON
           value: {{ default "" .Values.minecraftServer.icon | quote }}
         - name: MAX_PLAYERS
@@ -170,11 +174,13 @@ spec:
         {{- if .Values.minecraftServer.rcon.enabled }}
         - name: ENABLE_RCON
           value: "true"
+        {{- if .Values.minecraftServer.rcon.password }}
         - name: RCON_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ template "minecraft.fullname" . }}
               key: rcon-password
+        {{- end }}
         {{- end }}
 
         {{- if .Values.minecraftServer.query.enabled }}
