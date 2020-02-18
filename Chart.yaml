@@ -7,9 +7,6 @@ description: Minecraft server
 keywords:
 - game
 - server
-sources:
-- https://hub.docker.com/r/itzg/minecraft-server/~/dockerfile/
-- https://github.com/itzg/dockerfiles
 maintainers:
 - name: wgoeller
   email: william@williamgoeller.com
